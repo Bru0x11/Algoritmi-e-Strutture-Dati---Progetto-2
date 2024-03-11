@@ -1,0 +1,142 @@
+\documentclass[a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, italian]{babel}
+\usepackage{graphicx}
+\usepackage{filecontents}
+\begin{document}
+		\title{Relazione laboratorio Algoritmi e Strutture Dati}
+		\maketitle
+		
+		\begin{flushleft}
+			\author{Brugnera Matteo 137370@spes.uniud.it 137370}
+			\newline
+			\author{Rasera Giovanni 143395@spes.uniud.it 143395}
+		\end{flushleft}
+		
+		\begin{figure}[ht]
+			\centering
+			\includegraphics[width=10cm]{Udine}
+			\label{Udine}
+		\end{figure}
+		
+		\tableofcontents
+		\newpage
+		
+		\section{Alberi binari di ricerca semplici}
+			\subsection{Introduzione}
+				La prima struttura dati che viene presa in considerazione è quella dei \textit{BST}. \\
+				Per la loro rappresentazione è stata creata una classe che crea i singoli nodi, ognuno dei quali è composto da quattro attributi:
+				\begin{itemize}
+					\item \textbf{key:} elemento che rappresenta la chiave numerica del nodo;
+					\item \textbf{val:} elemento che rappresenta il valore del nodo sotto forma di stringa;
+					\item \textbf{left e right:} entrambi rappresentano i figli del nodo, rispettivamente quello sinistro e destro, e vengono inizializzati a \textit{NILL}.
+				\end{itemize}
+			    \begin{figure}[ht]
+			    	\includegraphics[width=3cm]{Attributi}
+			    	\includegraphics[width=4cm]{Creatore1}
+			    \end{figure}
+		    	Ogni nodo viene poi inizializzato grazie alla funzione \textbf{create} dove, una volta passati come parametri la chiave e il valore, mi crea il nodo. \\
+		    	Successivamente possiamo trovare delle funzione di supporto che servono a rendere la struttura più versatile e facile da utilizzare:
+		    	\begin{enumerate}
+		    		\item \textbf{la funzione insert:} inserisce un nuovo nodo nell'albero di ricerca passatogli come argomento, assumendo che esso non sia già contenuto al suo interno;
+		    		\item \textbf{la funzione find:} cerca all'interno dell'albero il nodo con chiave numerica k (passata come argomento) e restituisce (qualora esso esista) il valore di tipo stringa ad esso legato;
+		    		\item \textbf{la funzione clear:} rimuove ricorsivamente tutti i nodi dall'albero, che diventerà quindi vuoto, liberando così la memoria;
+		    		\item \textbf{la funzione min:} cerca il nodo con il valore minimo all'interno dell'albero;
+		    		\item \textbf{la funzione remove:} elimina il nodo cercato sistemando poi i suoi figli, qualora essi esistano;
+		    	\end{enumerate}
+		 \newpage
+		 
+		\section{Alberi binari di ricerca di tipo AVL}
+			\subsection{Introduzione}
+			La seconda struttura dati che analizziamo è quella degli alberi creati da \textit{Adelson-Velsky and Landis (AVL tree)}.\\
+			Oltre a soddisfare le proprietà di un albero di ricerca semplice, l'AVL ha una caratteristica in più: \textit{per ogni nodo x all'interno dell'albero, le altezze dei sotto-alberi di sinistra e di destra differiscono al massimo di 1.}\\
+			Tale proprietà viene garantita \textit{eseguendo opportune rotazioni sui nodi sbilanciati}, partendo dal nodo sbilanciato più profondo e procedendo risalendo l'albero lungo il cammino di accesso a quel nodo.\\
+			Per la loro rappresentazione è stata creata una classe che crea i singoli nodi, ognuno dei quali è composto da sei attributi:
+			\begin{itemize}
+				\item \textbf{key:} elemento che rappresenta la chiave numerica del nodo;
+				\item \textbf{val:} elemento che rappresenta il valore del nodo sotto forma di stringa;
+				\item \textbf{left, right e father:} rappresentano i figli del nodo, rispettivamente quello sinistro e destro, e il padre del nodo. Vengono inizializzati a \textit{NILL}.
+				\item \textbf{height:} rappresenta l'altezza del nodo ed è inizializzato a 1;
+			\end{itemize}
+			Possiamo trovare una serie di funzioni che servono a rendere la struttura funzionante:
+			\begin{enumerate}
+				\item \textbf{la funzione get height:} ritorna l'altezza dell'albero;
+				\item \textbf{la funzione destra e sinistra:} eseguono la rotazione dell'albero verso destra o sinistra;
+				\item \textbf{la funzione valore di bilanciamento:} ritorna 0 se la root è null oppure sono perfettamente bilanciati, 1 se c'è più peso a sinistra oppure -1 se c'è più peso a destra;
+				\item \textbf{tutte le funzioni viste precedentemente sui BST};
+			\end{enumerate}
+		\newpage
+			Di seguito vediamo un confronto tra BST e AVL. Il caso peggiore nei BST lo si ha quando vengono inseriti i numeri tra 1 ed n uno dopo l'altro, andando a creare un albero sbilanciato verso di un lato, formando quindi un unico "path".\\
+			L'AVL non è soggetto invece a questo problema, come dimostrato nel seguente grafico.\\
+			 			
+			\begin{figure}[ht]
+				\includegraphics[width=15cm]{CasoPeggioreBST}
+				\caption{L'inserimento viene a costare quindi theta(n) a differenza di O(Logn) per gli AVL.}
+			\end{figure}
+			
+		\newpage
+		
+		\section{Alberi binari di ricerca di tipo Red-Black}
+			\subsection{Introduzione}
+			L'ultima struttura dati che analizzeremo è quella dei Red-Black Tree.\\
+			Come prima cosa viene creata sia la tipologia di colore che un nodo può avere (ovvero \textit{nero} o \textit{rosso}), che la tipologia del nodo stesso (ovvero \textit{root}, \textit{left} o \textit{right}).\\
+			\begin{figure}[ht]
+				\includegraphics[width=3cm]{Enum}
+			\end{figure}
+			Proprio come per le altre due strutture, anche qui viene creata la stessa classe per la rappresentazione del nodo, con però l'aggiunta di attributi in più come \textit{il nodo padre} e \textit{il colore del nodo}.\\
+			Troviamo inoltre la presenza degli stessi metodi dei BST con l'aggiunta di:
+			\begin{itemize}
+				\item \textbf{rotateR e rotateL:} rispettivamente ruotano a destra e sinistra l'albero grazie ad un perno passato come argomento e serve per ri-bilanciare l'albero;
+				\item \textbf{getColor:} mi dice il colore del nodo passato come argomento;
+				\item \textbf{uncle:} mi ritorna lo zio del nodo preso in considerazione;
+				\item \textbf{grandfather:} mi ritorna lo zio del nodo preso in considerazione;
+				\item \textbf{checkBST:} ritorna true qualora l'albero abbia tutti i puntatori giusti;
+				\item \textbf{check:} ritorna true qualora l'RBT abbia tutti i puntatori giusti, colori giusti e black-height corretta;
+			\end{itemize}
+			
+			\newpage
+		\section{Algortimo per il calcolo dei tempi}
+		Viene eseguita una stima dei tempi medi e \textbf{ammortizzati} per l'esecuzione di \textbf{n} operazioni, sia di inserimento che di ricerca, nelle tre strutture dati viste precedentemente. \\
+		Viene scelto inizialmente un parametro \textbf{n} che corrisponde al numero di operazioni che vogliamo che vengano fatte su un albero inizialmente vuoto. Le operazioni che vengono eseguite sono:
+		\begin{enumerate}
+			\item \textbf{generazione in modo pseudo-casuale del valore k};
+			\item \textbf{ricerca di un nodo con chiave k};
+			\item \textbf{qualora esso non esista, si crea un nuovo nodo con chiave k e lo si inserisce all'interno della struttura};
+			\item \textbf{gestione della memoria:} ad ogni iterazione la memoria viene cancellata grazie ai metodi \textit{clear} presenti dentro al codice degli alberi.
+		\end{enumerate}
+		Infine abbiamo che il tempo ammortizzato di tutte le operazione eseguite è il risultato dato da il \textit{tempo totale impiegato per l'esecuzione delle operazioni diviso il parametro n}.\\
+		Abbiamo ottenuto quindi un tempo ammortizzato che ha un errore relativo che non supera mai 
+		\textbf{l'1\%}
+		
+		\subsection{Analisi algoritmo e grafici}
+		Una sezione importante del calcolo del tempo è quella di pulizia dell'albero dalla RAM, fatta per non saturare la memoria con troppi elementi.\\
+		Di seguito viene riportata un sezione di codice cruciale: 
+		\begin{figure}[ht]
+			\includegraphics[width=10cm]{Descrizione}
+		\end{figure}
+		\newpage
+		Di seguito vengono illustrati singolarmente i tempi di esecuzione delle tre strutture dati, con annessa rappresentazione della \textit{standard deviation}, sia in scala \textit{lineare} che in scala \textit{logaritmica}.\\
+		\begin{figure}[ht]
+			\includegraphics[width=13cm]{BST}
+			\caption{In questo caso il BST risulta essere veloce siccome gli elementi randomici sono generati uniformemente}
+			\includegraphics[width=13cm]{AVL}
+			\caption{L'AVL ottiene sempre questo andamento, anche nel caso peggiore, in quanto l'altezza dell'albero risulta essere logaritmica}
+			\includegraphics[width=13cm]{RBT}
+			\caption{Grazie alla presenza dei colori e grazie alle operazioni di rotazione, questa struttura riesce ad essere la più performante in quanto un singolo inserimento costa O(logn)}
+		\end{figure}
+		
+		
+		\newpage
+		\subsection{Confronto finale tra le strutture}
+		Una volta ottenuti i grafici, possiamo fare un \textit{confronto tra i tempi di esecuzione} ottenuti con le tre strutture dati implementate.\\
+		Si nota fin da subito come la crescita dei tempi degli alberi \textbf{AVL} sia di gran lunga \textbf{superiore} rispetto a quella degli altri 2 già a partire dai primi inserimenti.\\
+		BST e RBT invece \textbf{sono pressoché identici fino ai 400000 nodi inseriti}, punto in cui gli \textbf{RBT diventano leggermente più veloci} rispetto ai BST. \\
+		Il tutto viene reso più esplicito dai grafici analizzati in scala doppiamente logaritmica.\\
+		Da tenere in considerazione che, qualora si ottenga il caso peggiore dei BST, esso risulta avere una complessità computazionale peggiore rispetto a quello delle altre strutture dati.
+		\begin{figure}[ht]
+			\includegraphics[width=13cm]{ComaprazioneLIN}
+			\includegraphics[width=13cm]{ComparazioneLOG}
+		\end{figure}
+	
+\end{document}
