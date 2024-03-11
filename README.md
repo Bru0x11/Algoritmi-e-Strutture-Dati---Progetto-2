@@ -1,17 +1,8 @@
-# AlgoritmiProgetto2
+# Progetto2
 Parte due, creazione di alberi
 - Binary Search Tree
 - Red Black Tree
-- AVL Tree
 
-# TODO:
-- Calcolatore dei tempi
-    - Generalizzazione del calcolo del tempo utilizzando l'interfaccia Lambda
-    - Aggingere la gestione del codice generalizzato per ogni tipo di albero
-    - Test del tempo
-- Finire Relazione
-- Creazione dei grafici
-- RISOLVERE IL PROBLEMA DELLA DEALLOCAZIONE DELLA MEMORIA
 
 # Richieste
 Di seguito sono riportate le consegne per la seconda parte del progetto di laboratorio, da consegnare necessariamente prima dell'iscrizione all'esame finale di teoria.
